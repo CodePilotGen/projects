@@ -1,0 +1,106 @@
+[
+    {
+        "title": "What do you do in your free time?",
+        "options": [
+            {
+                "title":"Read science magazines",
+                "hypothesis": [
+                    {"id":1, "point": 10},
+                    {"id":2, "point": 20}
+                ]
+            },
+            {
+                "title":"Learn magic tricks",
+                "hypothesis": [
+                    {"id":3,"point": 30},
+                    {"id":4, "point": 10}
+                ]
+            },
+            {
+                "title":"Work out at the gym",
+                "hypothesis": [
+                    {"id":5, "point": 30},
+                    {"id":6,"point": 20},
+                    {"id":7,"point": 10}
+                ]
+            }
+        ],
+        "visible": true
+    },
+    {
+        "title": "Question1",
+        "options": [
+            {
+                "title":"Option1",
+                "hypothesis": [
+                    {"id":4, "point": 10},
+                    {"id":5, "point": 90}
+                ]
+            },
+            {
+                "title":"Option2",
+                "hypothesis": [
+                    {"id":4,"point": 70},
+                    {"id":6, "point": 50}
+                ]
+            },
+            {
+                "title":"Option3",
+                "hypothesis": [
+                    {"id":5, "point": 40}
+                ]
+            }
+        ],
+        "visible": true
+    },
+    {
+        "title": "Question2",
+        "options": [
+            {
+                "title":"Option1",
+                "hypothesis": [
+                    {"id":4, "point": 10}
+                ]
+            },
+            {
+                "title":"Option2",
+                "hypothesis": [
+                    {"id":5,"point": 10}
+                ]
+            },
+            {
+                "title":"Option3",
+                "hypothesis": [
+                    {"id":4, "point": 60}
+                ]
+            }
+        ],
+        "visible": true
+    },
+    {
+        "title": "Question3",
+        "options": [
+            {
+                "title":"Option1",
+                "hypothesis": [
+                    {"id":5, "point": 10},
+                    {"id":6, "point": 10}
+                ]
+            },
+            {
+                "title":"Option2",
+                "hypothesis": [
+                    {"id":4,"point": 40},
+                    {"id":6, "point": 50}
+                ]
+            },
+            {
+                "title":"Option3",
+                "hypothesis": [
+                    {"id":6, "point": 90}
+                ]
+            }
+        ],
+        "visible": false
+    }
+]
