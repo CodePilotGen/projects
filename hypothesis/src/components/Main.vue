@@ -86,8 +86,9 @@ export default {
         }
       }
       this.loading = false
-      console.log(this.questions, this.hypothesis)
+  
     },
+
     calculateResult () {
       var numeral = require('numeral')
       for (var i in this.hypothesis) {
@@ -96,6 +97,7 @@ export default {
         this.hypothesis[i].confidence = Math.round(this.hypothesis[i].confPoint / this.hypothesis[i].totalPoint * 100)
       }
     },
+
     nextQuiz () {
       while (1) {
         this.calculateResult()
@@ -116,6 +118,7 @@ export default {
       }
       this.loading = false
     },
+
     prevQuiz () {
       if (this.curQuizInd > 0) {
         this.title = this.questions[this.curQuizInd - 1].title
@@ -127,8 +130,9 @@ export default {
       this.curQuizInd--
       this.loading = false
     },
+
     clickOption (index) {
-      console.log(index)
+     
       this.questions[this.curQuizInd].options[index].check = !this.questions[this.curQuizInd].options[index].check
       var curChkState = this.questions[this.curQuizInd].options[index].check
       var hypothesisList = this.questions[this.curQuizInd].options[index].hypothesis
@@ -136,6 +140,7 @@ export default {
         var dif = curChkState ? hypothesisList[i].point : -1 * hypothesisList[i].point
         this.hypothesis[hypothesisList[i].id].point += dif
       }
+
     }
   },
   watch: {
