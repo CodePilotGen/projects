@@ -28,50 +28,51 @@
         "visible": true
     },
     {
-        "title": "Question1",
+        "title": "What was your favourite subject at school?",
         "options": [
             {
-                "title":"Option1",
+                "title":"Chemistry",
                 "hypothesis": [
                     {"id":4, "point": 10},
-                    {"id":5, "point": 90}
+                    {"id":2, "point": 90}
                 ]
             },
             {
-                "title":"Option2",
+                "title":"Maths",
                 "hypothesis": [
-                    {"id":4,"point": 70},
+                    {"id":4,"point": 10},
                     {"id":6, "point": 50}
                 ]
             },
             {
-                "title":"Option3",
+                "title":"Sport",
                 "hypothesis": [
-                    {"id":5, "point": 40}
+                    {"id":5, "point": 60}
                 ]
             }
         ],
         "visible": true
     },
     {
-        "title": "Question2",
+        "title": "What is your favorite sports?",
         "options": [
             {
-                "title":"Option1",
+                "title":"Football",
                 "hypothesis": [
-                    {"id":4, "point": 10}
+                    {"id":7, "point": 50},
+                    {"id":1, "point": 10}
                 ]
             },
             {
-                "title":"Option2",
+                "title":"Swimming",
                 "hypothesis": [
-                    {"id":5,"point": 10}
+                    {"id":5,"point": 30}
                 ]
             },
             {
-                "title":"Option3",
+                "title":"Basketball",
                 "hypothesis": [
-                    {"id":4, "point": 60}
+                    {"id":4, "point": 20}
                 ]
             }
         ],

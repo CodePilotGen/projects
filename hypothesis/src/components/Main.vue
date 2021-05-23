@@ -1,45 +1,47 @@
 <template>
     <!-- <h1>{{mydetails()}}</h1> -->
     <div class="container">
-      <h2>Hypothesis</h2>
+
+      <div class="result-box" v-if="stage !== 'welcome'">
+        <table class="table table-dark table-hover">
+          <thead>
+            <tr>
+              <th>Hypothesis</th>
+              <th>Level</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="hypothesis-result" v-for="(hypothesisItem, i) in hypothesis" :key="i">
+              <td>{{hypothesisItem.title}}</td>
+              <td>{{hypothesisItem.level}}</td>
+              <td>{{hypothesisItem.confidence}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
       <transition name="fade" mode="out-in" v-if="!loading">
         <div :key="curQuizInd">
           <h1 class="quiz-heading" v-html="title"></h1>
           <div class="start-box" v-if="stage === 'welcome'">
-            <button type="button" class="btn btn-primary" v-on:click="nextQuiz">start</button>
+            <button type="button" class="btn btn-primary" @click="nextQuiz">start</button>
           </div>
           <div class="option-box" v-if="stage === 'quiz'">
             <ul class="quiz-options">
               <p class="quiz-option" v-for="(option, i) in questions[curQuizInd].options" :key="i">
+                
+                <input class="form-check-input quiz-question-button" :checked="option.check" type="checkbox" @click="clickOption(i)">
                 <label class="form-check-label">
-                  <input class="form-check-input quiz-question-button" v-bind:checked="option.check" type="checkbox" @click="clickOption(i)">{{option.title}}
+                  {{option.title}}
                 </label>
+
               </p>
             </ul>
-            <button type="button" class="btn btn-primary" v-bind:disabled="curQuizInd===0" v-on:click="prevQuiz">Prev</button>
-            <button type="button" class="btn btn-primary" v-on:click="nextQuiz">Next</button>
+            <button type="button" class="btn btn-primary" :disabled="curQuizInd===0" @click="prevQuiz">Prev</button>
+            <button type="button" class="btn btn-primary" @click="nextQuiz">Next</button>
           </div>
-          <div class="result-box" v-if="stage === 'result'">
-            <table class="table table-dark table-hover">
-              <thead>
-                <tr>
-                  <th>Hypothesis</th>
-                  <th>Level</th>
-                  <th>Confidence</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="hypothesis-result" v-for="(hypothesisItem, i) in hypothesis" :key="i">
-                  <td>{{hypothesisItem.title}}</td>
-                  <td>{{hypothesisItem.level}}</td>
-                  <td>{{hypothesisItem.confidence}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- <div class="loader" v-else>
-            <span></span>
-          </div> -->
+        
         </div>
       </transition>
     </div>
@@ -84,7 +86,7 @@ export default {
         }
       }
       this.loading = false
-      // console.log(this.questions, this.hypothesis)
+      console.log(this.questions, this.hypothesis)
     },
     calculateResult () {
       var numeral = require('numeral')
@@ -96,6 +98,7 @@ export default {
     },
     nextQuiz () {
       while (1) {
+        this.calculateResult()
         this.curQuizInd++
         if (this.curQuizInd < this.questions.length) {
           // if visible === false, continue to the next quiz
@@ -105,7 +108,7 @@ export default {
           this.stage = 'quiz'
         } else {
           // Recalculate result level, confidence value
-          this.calculateResult()
+          
           this.title = 'Result'
           this.stage = 'result'
         }
@@ -154,72 +157,84 @@ export default {
   .hypothesis-result span {
     margin: 0 20px;
   }
-  /* Loader */
-.loader {
-  height: 32px;
-  width: 32px;
-}
-.loader span {
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  height: 32px;
-  width: 32px;
-}
-.loader span::before,
-.loader span::after {
-  content: "";
-  display: block;
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  margin: auto;
-  height: 32px;
-  width: 32px;
-  border: 2px solid #fff;
-  border-radius: 50%;
-  opacity: 0;
-  animation: loader-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
-}
-@keyframes loader-1 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0);
-    opacity: 1;
+
+  .option-box{
+    display: inline-block;
   }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1.5);
+ 
+  .loader {
+    height: 32px;
+    width: 32px;
+  }
+  .loader span {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 32px;
+    width: 32px;
+  }
+  .loader span::before,
+  .loader span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    height: 32px;
+    width: 32px;
+    border: 2px solid #fff;
+    border-radius: 50%;
     opacity: 0;
+    animation: loader-1 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) infinite;
   }
-}
-.loader span::after {
-  animation: loader-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s infinite;
-}
-@keyframes loader-2 {
-  0% {
-    transform: translate3d(0, 0, 0) scale(0);
-    opacity: 1;
+
+  .quiz-option{
+    text-align: left;
   }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
+  @keyframes loader-1 {
+    0% {
+      transform: translate3d(0, 0, 0) scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1.5);
+      opacity: 0;
+    }
+  }
+  .loader span::after {
+    animation: loader-2 1.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.25s infinite;
+  }
+  @keyframes loader-2 {
+    0% {
+      transform: translate3d(0, 0, 0) scale(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translate3d(0, 0, 0) scale(1);
+      opacity: 0;
+    }
+  }
+  /* Transition */
+  .fade-enter-active,
+  .fade-leave-active {
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
+    transform: scale(0.95);
   }
-}
-/* Transition */
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s, transform 0.5s;
-}
-.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  opacity: 0;
-  transform: scale(0.95);
-}
-.result-box table {
-  margin: auto;
-}
+
+  .result-box{
+    margin-bottom: 25px;
+  }
+  .result-box table {
+    margin: auto;
+  }
 </style>

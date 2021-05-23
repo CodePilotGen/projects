@@ -2,11 +2,10 @@
   <div id="app">
     <header class="app-header">
       <h1 class="app-heading">
-        <span>Hypothesis</span>
+       <!--  <span>Hypothesis</span>
         <span>Questions</span>
-      </h1>
+ -->      </h1>
     </header>
-    <img src="./assets/logo.png">
     <router-view/>
   </div>
 </template>
