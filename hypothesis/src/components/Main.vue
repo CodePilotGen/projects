@@ -2,7 +2,7 @@
     <!-- <h1>{{mydetails()}}</h1> -->
     <div class="container">
 
-      <div class="result-box" v-if="stage !== 'welcome'">
+      <div class="result-box" v-if="actionIndex/* || stage !== 'welcome'*/">
         <table class="table table-dark table-hover">
           <thead>
             <tr>
@@ -60,9 +60,11 @@ export default {
       questions: questionData,
       // currentQuestion: questionData.length > 0 ? questionData[0] : null,
       curQuizInd: -1,
+      topQuizInd: -1,
       hypothesis: {},
       stage: 'welcome',
-      title: 'Welcome to Consulting System. <br> Will you try?'
+      title: 'Welcome to Consulting System. <br> Will you try?',
+      actionIndex: 0
     }
   },
   computed: {
@@ -70,7 +72,7 @@ export default {
   methods: {
     async init () {
       for (var i in hypothesisData) {
-        this.hypothesis[hypothesisData[i].id] = {'title': hypothesisData[i].title, 'totalPoint': 0, 'point': 0, 'confPoint': 0, 'level': 0, 'confidence': 0}
+        this.hypothesis[hypothesisData[i].id] = {'title': hypothesisData[i].title, 'totalPoint': 0, 'point': 0, 'confPoint': 0, 'level': 0, 'curConfPoint': 0 , 'confidence': 0}
       }
       for (var j in questionData) {
         var optionList = questionData[j].options
@@ -86,32 +88,48 @@ export default {
         }
       }
       this.loading = false
-      console.log(this.questions, this.hypothesis)
+      // console.log(this.questions, this.hypothesis)
     },
-    calculateResult () {
+    calculateLevel () {
       var numeral = require('numeral')
       for (var i in this.hypothesis) {
         i = String(i)
         this.hypothesis[i].level = numeral(this.hypothesis[i].point / this.hypothesis[i].confPoint).format('0.00')
-        this.hypothesis[i].confidence = Math.round(this.hypothesis[i].confPoint / this.hypothesis[i].totalPoint * 100)
+        // this.hypothesis[i].confidence = Math.round(this.hypothesis[i].confPoint / this.hypothesis[i].totalPoint * 100)
       }
+      console.log(this.hypothesis)
+    },
+    reCalculateConfidence () {
+
     },
     nextQuiz () {
       while (1) {
-        this.calculateResult()
+        // this.calculateLevel()
         this.curQuizInd++
         if (this.curQuizInd < this.questions.length) {
           // if visible === false, continue to the next quiz
           if (!this.questions[this.curQuizInd].visible) continue
           // else, display this quiz
           this.title = this.questions[this.curQuizInd].title
-          this.stage = 'quiz'
+          // this.stage = 'quiz'
         } else {
           // Recalculate result level, confidence value
-          
           this.title = 'Result'
-          this.stage = 'result'
+          // this.stage = 'result'
         }
+        // calculate confidence
+        if (this.curQuizInd > this.topQuizInd + 1) {
+          this.topQuizInd = this.curQuizInd - 1
+          var optionList =  this.questions[this.topQuizInd].options
+          for (var k in optionList) {
+            var hypothesisList = optionList[k].hypothesis
+            for (var l in hypothesisList) {
+              this.hypothesis[hypothesisList[l].id].curConfPoint += hypothesisList[l].point
+              this.hypothesis[hypothesisList[l].id].confidence = Math.round( this.hypothesis[hypothesisList[l].id].curConfPoint /  this.hypothesis[hypothesisList[l].id].totalPoint * 100)
+            }
+          }
+        }
+        this.actionIndex++
         break
       }
       this.loading = false
@@ -119,16 +137,17 @@ export default {
     prevQuiz () {
       if (this.curQuizInd > 0) {
         this.title = this.questions[this.curQuizInd - 1].title
-        this.stage = 'quiz'
+        // this.stage = 'quiz'
       } else {
         this.title = 'Welcome to Consulting System'
-        this.stage = 'welcome'
+        // this.stage = 'welcome'
       }
       this.curQuizInd--
+      this.actionIndex++
       this.loading = false
     },
     clickOption (index) {
-      console.log(index)
+      // console.log(index)
       this.questions[this.curQuizInd].options[index].check = !this.questions[this.curQuizInd].options[index].check
       var curChkState = this.questions[this.curQuizInd].options[index].check
       var hypothesisList = this.questions[this.curQuizInd].options[index].hypothesis
@@ -136,12 +155,18 @@ export default {
         var dif = curChkState ? hypothesisList[i].point : -1 * hypothesisList[i].point
         this.hypothesis[hypothesisList[i].id].point += dif
       }
+      // console.log(this.curQuizInd, index)
+      this.calculateLevel()
+      // this.stage = "quiz"
+      this.actionIndex++
     }
   },
   watch: {
     curQuizInd (val) {
       if (val !== null) {
-        if (val < this.questions.length) this.stage = 'quiz'
+        if (val < this.questions.length) {
+          this.stage = 'quiz'
+        }
         else this.stage = 'result'
       }
     }
