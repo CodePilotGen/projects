@@ -1,0 +1,74 @@
+CRITICAL - 2021-05-24 13:55:26 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(231): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(183): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 E:\dev\projects\hypothesis-ci4-vue\system\bootstrap.php(157): CodeIgniter\CodeIgniter->initialize()
+#3 E:\dev\projects\hypothesis-ci4-vue\public\index.php(27): require('E:\\dev\\projects...')
+#4 {main}
+CRITICAL - 2021-05-24 14:31:38 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(231): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(183): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 E:\dev\projects\hypothesis-ci4-vue\system\bootstrap.php(157): CodeIgniter\CodeIgniter->initialize()
+#3 E:\dev\projects\hypothesis-ci4-vue\public\index.php(27): require('E:\\dev\\projects...')
+#4 {main}
+CRITICAL - 2021-05-24 14:33:11 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(231): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(183): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 E:\dev\projects\hypothesis-ci4-vue\system\bootstrap.php(157): CodeIgniter\CodeIgniter->initialize()
+#3 E:\dev\projects\hypothesis-ci4-vue\public\index.php(27): require('E:\\dev\\projects...')
+#4 {main}
+CRITICAL - 2021-05-24 14:33:14 --> The framework needs the following extension(s) installed and loaded: intl.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(231): CodeIgniter\Exceptions\FrameworkException::forMissingExtension('intl')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(183): CodeIgniter\CodeIgniter->resolvePlatformExtensions()
+#2 E:\dev\projects\hypothesis-ci4-vue\system\bootstrap.php(157): CodeIgniter\CodeIgniter->initialize()
+#3 E:\dev\projects\hypothesis-ci4-vue\public\index.php(27): require('E:\\dev\\projects...')
+#4 {main}
+CRITICAL - 2021-05-24 08:00:50 --> validateEmail is not a valid rule.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(321): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateEmail')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(159): CodeIgniter\Validation\Validation->processRules('email', 'email', 'pemarekdendorje...', Array, Array)
+#2 E:\dev\projects\hypothesis-ci4-vue\system\Controller.php(183): CodeIgniter\Validation\Validation->run()
+#3 E:\dev\projects\hypothesis-ci4-vue\app\Controllers\Auth.php(37): CodeIgniter\Controller->validate(Array, Array)
+#4 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(931): App\Controllers\Auth->login()
+#5 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(439): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(339): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 E:\dev\projects\hypothesis-ci4-vue\public\index.php(36): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-05-24 08:10:07 --> validateEmail is not a valid rule.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(321): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateEmail')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(159): CodeIgniter\Validation\Validation->processRules('email', 'email', 'pemarekdendorje...', Array, Array)
+#2 E:\dev\projects\hypothesis-ci4-vue\system\Controller.php(183): CodeIgniter\Validation\Validation->run()
+#3 E:\dev\projects\hypothesis-ci4-vue\app\Controllers\Auth.php(37): CodeIgniter\Controller->validate(Array, Array)
+#4 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(931): App\Controllers\Auth->login()
+#5 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(439): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(339): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 E:\dev\projects\hypothesis-ci4-vue\public\index.php(36): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-05-24 08:13:31 --> validateEmail is not a valid rule.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(321): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateEmail')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(159): CodeIgniter\Validation\Validation->processRules('email', 'email', 'pemarekdendorje...', Array, Array)
+#2 E:\dev\projects\hypothesis-ci4-vue\system\Controller.php(183): CodeIgniter\Validation\Validation->run()
+#3 E:\dev\projects\hypothesis-ci4-vue\app\Controllers\Auth.php(37): CodeIgniter\Controller->validate(Array, Array)
+#4 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(931): App\Controllers\Auth->login()
+#5 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(439): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(339): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 E:\dev\projects\hypothesis-ci4-vue\public\index.php(36): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-05-24 08:14:40 --> validateEmail is not a valid rule.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(321): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateEmail')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(159): CodeIgniter\Validation\Validation->processRules('email', 'email', 'pemarekdendorje...', Array, Array)
+#2 E:\dev\projects\hypothesis-ci4-vue\system\Controller.php(183): CodeIgniter\Validation\Validation->run()
+#3 E:\dev\projects\hypothesis-ci4-vue\app\Controllers\Auth.php(37): CodeIgniter\Controller->validate(Array, Array)
+#4 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(931): App\Controllers\Auth->login()
+#5 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(439): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(339): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 E:\dev\projects\hypothesis-ci4-vue\public\index.php(36): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2021-05-24 08:16:17 --> validateEmail is not a valid rule.
+#0 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(321): CodeIgniter\Validation\Exceptions\ValidationException::forRuleNotFound('validateEmail')
+#1 E:\dev\projects\hypothesis-ci4-vue\system\Validation\Validation.php(159): CodeIgniter\Validation\Validation->processRules('email', 'email', 'pemarekdendorje...', Array, Array)
+#2 E:\dev\projects\hypothesis-ci4-vue\system\Controller.php(183): CodeIgniter\Validation\Validation->run()
+#3 E:\dev\projects\hypothesis-ci4-vue\app\Controllers\Auth.php(37): CodeIgniter\Controller->validate(Array, Array)
+#4 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(931): App\Controllers\Auth->login()
+#5 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(439): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Auth))
+#6 E:\dev\projects\hypothesis-ci4-vue\system\CodeIgniter.php(339): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 E:\dev\projects\hypothesis-ci4-vue\public\index.php(36): CodeIgniter\CodeIgniter->run()
+#8 {main}
