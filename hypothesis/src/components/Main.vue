@@ -102,6 +102,9 @@ export default {
     reCalculateConfidence () {
 
     },
+    reCalculateConfidence () {
+
+    },
     nextQuiz () {
       while (1) {
         // this.calculateLevel()
