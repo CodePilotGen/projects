@@ -150,7 +150,6 @@ export default {
       this.loading = false
     },
     clickOption (index) {
-      // console.log(index)
       this.questions[this.curQuizInd].options[index].check = !this.questions[this.curQuizInd].options[index].check
       var curChkState = this.questions[this.curQuizInd].options[index].check
       var hypothesisList = this.questions[this.curQuizInd].options[index].hypothesis
@@ -158,9 +157,7 @@ export default {
         var dif = curChkState ? hypothesisList[i].point : -1 * hypothesisList[i].point
         this.hypothesis[hypothesisList[i].id].point += dif
       }
-      // console.log(this.curQuizInd, index)
       this.calculateLevel()
-      // this.stage = "quiz"
       this.actionIndex++
     }
   },
