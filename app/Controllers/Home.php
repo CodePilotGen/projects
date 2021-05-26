@@ -38,10 +38,13 @@ class Home extends BaseController
 		}
 	}
 
-	public function loadDashBoard() {
-		return view('app/home')
-	}
-
 	//--------------------------------------------------------------------
 
+	public function getdashboard() {
+		return view('app/getdashboard');
+	}
+
+	public function getuserlist() {
+		return view('app/getuserlist');
+	}
 }
