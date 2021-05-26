@@ -26,7 +26,7 @@ class Dashboard extends BaseController
 		// echo view('templates/header', $data);
 		// echo view('dashboard');
 		// echo view('templates/footer');
-		return view('metronic/index');
+		return view('app/dashboard');
 	}
 
 	//--------------------------------------------------------------------

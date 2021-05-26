@@ -69,7 +69,7 @@ $routes->group('', ['filter' => 'auth:Role,1'], function ($routes) {
 
 $routes->group('', ['filter' => 'auth:Role,2'], function ($routes){
 
-	$routes->get('dashboard', 'Dashboard::index'); // ADMIN DASHBOARD
+	$routes->get('/', 'Home::index'); // ADMIN DASHBOARD
 	$routes->match(['get', 'post'], 'dashboard/profile', 'Auth::profile');
 });
 
@@ -86,6 +86,7 @@ $routes->group('', ['filter' => 'auth:Role,2'], function ($routes){
  * You will have access to the $routes object within that file without
  * needing to reload it.
  */
+
 if (file_exists(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php'))
 {
 	require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
