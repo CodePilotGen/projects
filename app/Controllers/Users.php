@@ -32,6 +32,13 @@ class Users extends BaseController
 		return view('users/users',$data);
 	}
     /*
+    * List Users using Table
+    */
+    public function list(){
+        return view('users/users');
+    }
+
+    /*
     * Create New  Users Action
     */
     public function create()
