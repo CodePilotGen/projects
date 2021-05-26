@@ -39,7 +39,7 @@ class Home extends BaseController
 	}
 
 	public function loadDashBoard() {
-		return view('app/home')
+		return view('app/home');
 	}
 
 	//--------------------------------------------------------------------
