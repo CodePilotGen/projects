@@ -2150,6 +2150,9 @@
 <script type="text/javascript">
     var baseUrl = <?= json_encode(base_url()) ?>;
 </script>
+<script src="assets/js/custom/apps/user-management/users/list/table.js"></script>
+<script src="assets/js/custom/apps/user-management/users/list/export-users.js"></script>
+<script src="assets/js/custom/apps/user-management/users/list/add.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>/app/home/index.js?v1.01"></script>
 <?= $this->endSection() ?>
 <?= $this->endSection() ?>
