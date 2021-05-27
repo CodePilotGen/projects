@@ -11,7 +11,8 @@ License:
 -->
 <html lang="en">
 	<!--begin::Head-->
-	<head><base href="">
+	<head>
+		<?= $this->renderSection('base_href')?>
 		<meta charset="utf-8" />
 		<title>ThinkFrame</title>
 		<meta name="keywords" content="ThinkFrame, Codeigniter4, Metronic, bootstrap, bootstrap 5" />
@@ -22,10 +23,10 @@ License:
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
-		<link href="<?= base_url() ?>/assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
-		<link href="<?= base_url() ?>/assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="assets/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-        <script src="<?= base_url() ?>/libs/jquery/jquery-3.6.0.min.js"></script>
+        <!-- <script src="libs/jquery/jquery-3.6.0.min.js"></script> -->
 	</head>
 	<!--end::Head-->
 	<!--begin::Body-->
@@ -35,8 +36,8 @@ License:
 		<!--end::Main-->
 		<!--begin::Javascript-->
 		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="<?= base_url() ?>/assets/plugins/global/plugins.bundle.js"></script>
-		<script src="<?= base_url() ?>/assets/js/scripts.bundle.js"></script>
+		<script src="assets/plugins/global/plugins.bundle.js"></script>
+		<script src="assets/js/scripts.bundle.js"></script>
 		<!--end::Global Javascript Bundle-->
         <?= $this->renderSection('custom_script')?>
 		<!--end::Javascript-->
