@@ -69,7 +69,7 @@ $routes->group('', ['filter' => 'auth:Role,1'], function ($routes) {
 
 $routes->group('', ['filter' => 'auth:Role,2'], function ($routes){
 
-	$routes->get('/', 'Home::index'); // ADMIN DASHBOARD
+	$routes->get('/dashboard', 'Dashboard::index'); // ADMIN DASHBOARD
 	$routes->match(['get', 'post'], 'dashboard/profile', 'Auth::profile');
 });
 

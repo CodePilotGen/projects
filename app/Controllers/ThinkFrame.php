@@ -17,11 +17,19 @@
 
 namespace App\Controllers;
 
-class Dashboard extends BaseController
+class ThinkFrame extends BaseController
 {
-	public function index()
-	{
-		return view('app/dashboard');
+	
+    public function questions(){
+        return view('thinkframe/questions');
+    }
+
+    public function options(){
+        return view('thinkframe/options');
+    }
+
+    public function hyps(){
+        return view('thinkframe/hyps');
     }
 
 	//--------------------------------------------------------------------
