@@ -32,6 +32,10 @@ class ThinkFrame extends BaseController
         return view('thinkframe/hyps');
     }
 
+    public function combos(){
+        return view('thinkframe/combos');
+    }
+
 	//--------------------------------------------------------------------
 
 }

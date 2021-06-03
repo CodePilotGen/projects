@@ -195,9 +195,9 @@
             <!--begin::Menu-->
             <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch" id="#kt_header_menu" data-kt-menu="true">
                 <div class="menu-item me-lg-1">
-                    <button type="button" id="add_new_question" class="btn btn-lg btn-primary">
-                        <i class="fas fa-question"></i>&nbsp;ADD NEW QUESTION 
-                    </button>
+                    <button type="button" id="add_new_combo" class="btn btn-lg btn-primary">
+                        <i class="fas fa-plus"></i>&nbsp;ADD NEW COMBOS
+                    </button> 
                 </div>
             </div>
             <!--end::Menu-->
@@ -1887,10 +1887,10 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container">
         <!--begin::Card-->
-        <div class="card question-page">
+        <div class="card combo-page">
             <!--begin::Card body-->
             <div class="card-body pt-0">
-                <div class="question-container">
+                <div class="combo-container">
                  
                 </div>
             </div>
@@ -1899,7 +1899,7 @@
         <!--end::Card-->
     </div>
     <!--end::Container-->
-   
+  
 </div>
 <?= $this->endSection() ?>
 
@@ -1932,275 +1932,131 @@
             }
     }());
 
-    var new_question_id = 0;
-    var new_option_id = 0;
-    var new_hyp_id = 0;
-    var new_option_hyp_id = 0;
+    var new_combo_id = 0;
 
-    $.post('/getdatainjson/getMaxIds', function(result){
-       
-        var rs = JSON.parse(result);
-        new_question_id = parseInt(rs.question_last_id);
-        new_option_id   = parseInt(rs.option_last_id);
-        new_option_hyp_id      = parseInt(rs.option_hyp_last_id);
-      
+    $.post('/getdatainjson/combo_max_id', function(result) {
+        new_combo_id = parseInt(result);
     });
-   
-    $.post('/getdatainjson/allquestions', function(result){
-        
-        $('.question-container').empty();
 
+    $.post('/getdatainjson/combos', function(result) {
         var rs = JSON.parse(result);
 
-        for(var i in rs) {
-            if(i == 'hyps'){
-                break;
-            }
+        for(var i in rs){
 
-            $('.question-container').append(
-                new_question.compose({
-                    'question_id' : parseInt(i),
-                    'question_content' : rs[i].question_content 
+            $('.combo-container').append(
+                combo_block.compose({
+                    'combo_id'   : parseInt(i),
+                    'combo_name' : rs[i].combo_name
                 })
             );
 
+            var hyps = rs[i].hyps;
 
-            var options = rs[i].options;
-            
-            for(var k in options){
-                $('#question_block_' + parseInt(i)).append(
-                    new_option.compose({
-                        'question_id' : parseInt(i),
-                        'option_id'  : k,
-                        'option_content' : options[k].option_content 
+            for(var h in hyps){
+                $('#combo_block_' + i).append(
+                    hyp_list_item.compose({
+                        'hyp_id' : parseInt(hyps[h].hyp_id),
+                        'hyp_content' : hyps[h].hyp_content,
+                        'power' : hyps[h].power,
+                        'power_id' : hyps[h].power_id 
+                    })
+                );
+            }
+
+
+        }
+    });
+
+    $('#add_new_combo').click(function(){
+        new_combo_id++;
+
+        $('.combo-container').append(
+            combo_block.compose({
+                'combo_id' : new_combo_id,
+            })
+        );
+
+        $.post('/getdatainjson/hyps', function(result){
+
+            var rs = JSON.parse(result);
+            for(var i in rs){
+
+                $('#combo_block_' + new_combo_id).append(
+                    hyp_list_item.compose({
+                        'hyp_id' : parseInt(rs[i].hyp_id),
+                        'hyp_content' : rs[i].hyp_content 
                     })
                 );
 
-                var option_hyps = options[k].option_hyp;
+            }
+        });
 
-                for(var h in option_hyps){
-                    $('#option_box_'+parseInt(i)+'_'+k).append(
-                        new_hyp.compose({
-                            'question_id' : parseInt(i),
-                            'option_id'  : k,
-                            'hyp_id' : option_hyps[h].hyp_id,
-                            'point' :  option_hyps[h].option_hyp_point,
-                            'option_hyp_id' : option_hyps[h].option_hyp_id
-                        })
-                    );
+    });
 
+    $(document).on('click', '.remove-combo', function(e){
+        $combo_id = $(e.target).parent().parent().attr('combo_id');
+
+        $.post('/getdatainjson/delete_combo',{
+                combo_id   : $combo_id,
+            }, function(res,status){
+                if(status == 'success'){
+                    $(e.target).parent().parent().remove();
+                    
+                    setTimeout(function() {
+                      alert('Combo successfully deleted.');
+                    }, 1000);
                 }
-            }
+        });        
+    });
 
+    $(document).on('change', 'input.combo-name', function(e){
+        $combo_id = $(e.target).parent().parent().attr('combo_id');
+
+        $(e.target).addClass('input_ajax_started');
+
+        $.post('/getdatainjson/add_combo',{
+                combo_id   : $combo_id,
+                combo_name : $(e.target).val(),
+            }, function(res,status){
+                if(status == 'success'){
+                    setTimeout(function() {
+                      $(e.target).removeClass('input_ajax_started');
+                    }, 1000);
+                   
+                }
+        });
+    });
+
+    $(document).on('change', 'input.combo-power', function(e){
+        $combo_id = $(e.target).parent().parent().attr('combo_id');
+        $hyp_id   = $(e.target).parent().attr('hyp_id');
+
+        $post_action = "update";
+
+        $power_id = $(e.target).attr('id');
+        if($power_id == ""){
+            $post_action = "add";
         }
-
-        for(var h in rs.hyps[0]){
-            $(".hypo-list").append(new Option(rs.hyps[0][h].hyp_content, rs.hyps[0][h].hyp_id));
-        }
-
-        $.each( $('.question-container').find('select'), function( key, element ){
-            $hyp_id = $(element).parent().attr('hyp_id');
-            $(element).val(parseInt($hyp_id));
-        });
-
-        $('.question-block').find('input.question-content').change(function(e){
-            $question_id = $(e.target).parent().parent().attr('question_id');
-            $content = e.target.value;
-            $.post('/getdatainjson/addquestion',{question_id: $question_id, question_content : $content }, 
-                function(res,status){});
-        });
-
-        /**
-         * Each time option box's content changed, 
-         * its content will be added updated on its matched table in db. 
-         */
-
-        $('.option-box').find('input.option-content').change(function(e){
-          
-            $option_id = $(e.target).parent().attr('option_id');
-            $question_id = $(e.target).parent().attr('question_id');   
-
-            $.post('/getdatainjson/addoption',{
-                option_id : $option_id,
-                question_id: $question_id, 
-                option_content : e.target.value }, function(res,status){
-                        
-            });
-        });
-
-        /**
-         * Each time hyp box's content changed, 
-         * its content will be added or updated on its matched table in db.
-         */
-
-        $('.hypo-box').find('input.option-point').change(function(e){
-            $option_id = $(e.target).parent().parent().attr('option_id');
-
-            $hyp_id = $(e.target).parent().attr('hyp_id'); 
-            $option_hyp_id = $(e.target).attr('option_hyp_id');
-           
-            $.post('/getdatainjson/add_option_hyp',{
-                    option_hyp_id: $option_hyp_id, 
-                    option_id :  $option_id,
-                    hyp_id : $hyp_id,
-                    option_hyp_point : $(e.target).val(),
-                }, function(res,status){
-                    if(status == 'success'){
-                       //
-                    }
-            });
-        });
-
-    });
-
-    /**
-     * ------------------------------------
-     * 
-    */
-
-    $('#add_new_question').click(function(e){
-        new_question_id++;
-
-        $('.question-container').prepend(
-            new_question.compose({
-                'question_id' : new_question_id 
-            })
-        );
-
-        $('#question_block_' + new_question_id).find('input').focus(); // set focus on new added question textbox
-
-        /**
-         * Once clicked "-" button just at right of "Option +", 
-         * question block and its question data will be removed from UI and db. 
-         */
-        $('.question-block').find('input.question-content').change(function(e){
-                
-            $question_id = $(e.target).parent().parent().attr('question_id');
-
-            $.post('/getdatainjson/addquestion',{
-                question_id: parseInt($question_id), 
-                question_content : $(e.target).val() }, 
-                function(res,status){
-                    if(status == 'success'){
-                        new_question_id = parseInt(res);
-                    }
-            });
-        });
-    });
-
-    $(document).on('click', '.remove-question', function(e){
-        
-        $remove_question_id = $(e.target).parent().parent().attr('question_id');
-        $.post('/getdatainjson/deletequestion',{question_id: parseInt($remove_question_id) }, function(res,status){
-            if(status == 'success'){
-                $(e.target).parent().parent().remove();
-            }
-        });
-        
-    });
-
-    /**
-     * Once clicked "Add Option" button, this handler appends 
-     * option block to question block with same question id. 
-     */    
-    $(document).on('click','.add-option', function(e){
-        
-        new_option_id++;
-        $new_question_id = $(e.target).parent().parent().attr('question_id');
-        $('#question_block_' + new_question_id).append(
-            new_option.compose({
-                'question_id' : new_question_id,
-                'option_id'  : new_option_id
-            })
-        );
-
-        $('#option_box_' + new_question_id + '_' + new_option_id).find('input').focus(); // set focus on new added option textbox
-
-        /**
-         * Each time option box's content changed, 
-         * its content will be added updated on its matched table in db. 
-         */
-        $('.option-box').find('input.option-content').change(function(ev){   
-            
-            $option_id   = $(ev.target).parent().attr('option_id');
-            $question_id = $(ev.target).parent().attr('question_id');
-
-            $.post('/getdatainjson/addoption',{
-                    option_id      : $option_id,
-                    question_id    : $question_id, 
-                    option_content : $(ev.target).val() 
-                    }, function(res,status){
-                        if(status == 'success'){
-                           
-                        }
-            });
-
-        });
-      
-    });
-
-    /**
-     * Once clikced "remove option" button next to "Link +",
-     * Option block will be removed from Question Tree and its data will be delete from db.
-     */
-    $(document).on('click', '.remove-option', function(e){
-        $(this).parent().remove();
-        $remove_option_id = $(this).parent().attr('option_id');
-
-        $.post('/getdatainjson/deleteoption',{option_id: parseInt($remove_option_id) }, function(res,status){
-            if(status == 'success'){
-               
-            }
-        });
-    });    
-
-    /**
-     * Once clicked "Add Hyp" button, this handler appends 
-     * hyp block to option block with same option id. 
-     */
-    $(document).on('click', '.add-hyp', function(e){
        
-        new_hyp_id++;
-        new_option_hyp_id++;
+        $(e.target).addClass('input_ajax_started');
 
-        $question_id = $(e.target).parent().attr('question_id');
-        $option_id   = $(e.target).parent().attr('option_id');
-
-        $(e.target).parent().append(
-            new_hyp.compose({
-                'question_id' : $question_id,
-                'option_id'  : $option_id,
-                'hyp_id' : new_hyp_id,
-                'option_hyp_id' : new_option_hyp_id,
-            })
-        );
-
-
-
-        /**
-         * Each time hyp box's content changed, 
-         * its content will be added or updated on its matched table in db.
-         */
-        $('.hypo-box').find('input.option-point').change(function(e){
-            $option_hyp_id = $(e.target).attr('option_hyp_id');
-            $option_id     = $(e.target).parent().parent().attr('option_id');
-            $hyp_id        = $(e.target).parent().attr('hyp_id');
-            console.log('here');
-            $.post('/getdatainjson/add_option_hyp',{
-                    option_hyp_id: $option_hyp_id, 
-                    option_id :  $option_id,
-                    hyp_id : $hyp_id,
-                    option_hyp_point : $(e.target).val(),
-                }, function(res,status){
-                    if(status == 'success'){
-                     //
-                    }
-            });
+        $.post('/getdatainjson/add_power',{
+                combo_id   : $combo_id,
+                hyp_id     : $hyp_id,
+                power      : $(e.target).val(),
+                action     : $post_action,
+                power_id   : $power_id
+            }, function(res,status){
+                if(status == 'success'){
+                    setTimeout(function() {
+                      $(e.target).removeClass('input_ajax_started');
+                    }, 1000);
+                   
+                }
         });
 
     });
-
-
+    
 </script>
 
 <?= $this->endSection() ?>

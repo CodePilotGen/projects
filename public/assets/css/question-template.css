@@ -1,0 +1,180 @@
+
+.option-point{
+    width: 4%;
+    display: inline;
+    margin-left: 10px;
+    padding: 5px;
+    color:  purple !important;
+}
+
+.hypo-list{
+    width: 70%;
+    float: left;
+    color:  darkred !important;
+}
+
+.hypo-box{
+    margin-top: 5px;
+    margin-left: 20px;
+    width: 100%;
+    float: left;
+}
+
+.question-page{
+    background-color: #FCFFDC;
+}
+
+.hyp-page{
+    background-color: #f5feff;
+}
+
+.question-box{
+    margin-top: 10px;
+}
+
+.question-box button{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.option-box{
+    margin-left: 30px;
+    float: left;
+    width: 100%;
+}
+
+.option-box button{
+    margin-top: 5px;
+    margin-left: 5px;
+}
+
+.question-content{
+    font-size: 17px;
+    float: left;
+    width: 60%;
+    color: blue !important;
+}
+
+.option-content{
+    font-size: 14px;
+    float: left;
+    width: 60%;
+    color:  green !important;
+}
+
+.question-block{
+    float: left;
+    width: 100%;
+}
+
+.hyp-content{
+    font-size: 17px;
+    float: left;
+    width: 100%;
+    color:  darkred !important;
+}
+
+.hyp-block{
+    float: left;
+    width: 100%;
+    margin-top: 15px !important;
+}
+
+.hyp-container div{
+    margin-top: 5px;
+}
+
+.question-container input{
+    padding: 0.25rem 0.1em;
+}
+
+.hyp-container input{
+    padding: 0.25rem 0.1em;
+    background-color: #f5feff !important;
+}
+
+.hyp-question-block{
+    float: left;
+    width: 100%;
+    margin-left: 20px;
+}
+
+.option-point-hyp{
+    float: left;
+    display: block;
+    width: 4%;
+    clear: both;
+}
+
+.hyp-question-block input{
+    font-size: 15px;
+}
+
+.input_ajax_started {
+  box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
+  border: 1px solid rgba(81, 203, 238, 1);
+
+  background-color: #ffffff;
+  background-image: url("/assets/media/gif/animated-web-preloader.gif");
+  background-size: 25px 25px;
+  background-position:right center;
+  background-repeat: no-repeat;
+}
+
+.option-content-alert{
+    border: 2px solid red !important;
+}
+
+.header-fixed.toolbar-fixed .wrapper {
+    padding-top: 0px !important;
+}
+
+.content {
+    padding-top: 70px !important;
+    padding-bottom: 10px !important;
+}
+
+.combo-page{
+    background-color: #fff2f7;
+}
+
+.combo-container input {
+    padding: 0.25rem 0.1em;
+    background-color: #f5feff;
+}
+
+.combo-block{
+    float: left;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.combo-name{
+    float: left;
+    width: 70%;
+    font-size: 19px;
+}
+
+.remove-combo{
+    float: left;
+    display: block;
+    margin-top: 0px;
+}
+
+.hyp-list-item{
+    width: 100%;
+    float: left;
+    margin-left: 15px;
+    margin-top: 5px;
+}
+.hyp-list-item .combo-power{
+    float: left;
+    width: 4%;
+    margin-right: 5px;
+}
+
+.hyp-list-item .hyp-content{
+    float: left;
+    width: 60%;
+}
+
