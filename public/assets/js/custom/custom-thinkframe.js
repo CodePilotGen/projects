@@ -25,7 +25,7 @@
 
     var new_hyp =  '<div class="hypo-box" id="hypo_box_{{question_id}}_{{option_id}}_{{hyp_id}}" hyp_id="{{hyp_id}}">' +
                         '<select class="form-select form-select-sm hypo-list" aria-label=".form-select-sm example">' +
-                          '<option>No hypothesis available yet</option>' +
+                          '<option value="0" selected>No hypothesis available yet</option>' +
                         '</select>' +
                         '&nbsp;#<input type="text" option_hyp_id="{{option_hyp_id}}" value="{{point}}" placeholder="point" class="form-control form-control-solid option-point">' +
                     '</div>';
@@ -33,6 +33,7 @@
     var new_hyp_block =  '<div class="hyp-block" id="hyp_block_{{hyp_id}}" hyp_id={{hyp_id}}>' +
                             '<div class="hyp-box">' +
                                 '<input type="text" value="{{hyp_content}}" placeholder="Please enter the hypothesis." class="form-control form-control-solid hyp-content" />' +
+                                '<button class="btn btn-sm btn-warning remove-hyp">-</button>' +
                             '</div>' +
                         '</div>';
 

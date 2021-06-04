@@ -1914,9 +1914,9 @@
 <script src="assets/js/custom/apps/chat/chat.js"></script>
 <script src="assets/js/custom/modals/create-app.js"></script>
 <script src="assets/js/custom/modals/upgrade-plan.js"></script>
-<script src="assets/js/custom/quiz_template.js"></script>
+<script src="assets/js/custom/custom-thinkframe.js"></script>
 
-<link rel="stylesheet" href="assets/css/question-template.css">
+<link rel="stylesheet" href="assets/css/custom-thinkframe.css">
 
 <script>
 
@@ -1951,6 +1951,8 @@
         $('.question-container').empty();
 
         var rs = JSON.parse(result);
+
+        console.log(rs);
 
         for(var i in rs) {
             if(i == 'hyps'){
@@ -2077,12 +2079,15 @@
                 
             $question_id = $(e.target).parent().parent().attr('question_id');
 
+            $(e.target).addClass('input_ajax_started');
+
             $.post('/getdatainjson/addquestion',{
                 question_id: parseInt($question_id), 
                 question_content : $(e.target).val() }, 
                 function(res,status){
                     if(status == 'success'){
                         new_question_id = parseInt(res);
+                        $(e.target).removeClass('input_ajax_started');
                     }
             });
         });
@@ -2124,6 +2129,7 @@
             
             $option_id   = $(ev.target).parent().attr('option_id');
             $question_id = $(ev.target).parent().attr('question_id');
+            $(ev.target).addClass('input_ajax_started');
 
             $.post('/getdatainjson/addoption',{
                     option_id      : $option_id,
@@ -2131,7 +2137,9 @@
                     option_content : $(ev.target).val() 
                     }, function(res,status){
                         if(status == 'success'){
-                           
+                            setTimeout(function() {
+                              $(ev.target).removeClass('input_ajax_started');
+                            }, 1000);
                         }
             });
 
@@ -2149,7 +2157,9 @@
 
         $.post('/getdatainjson/deleteoption',{option_id: parseInt($remove_option_id) }, function(res,status){
             if(status == 'success'){
-               
+                setTimeout(function() {
+                  alert('Option successfully deleted.');
+                }, 1000);
             }
         });
     });    
@@ -2185,7 +2195,9 @@
             $option_hyp_id = $(e.target).attr('option_hyp_id');
             $option_id     = $(e.target).parent().parent().attr('option_id');
             $hyp_id        = $(e.target).parent().attr('hyp_id');
-            console.log('here');
+            
+            $(e.target).addClass('input_ajax_started');
+
             $.post('/getdatainjson/add_option_hyp',{
                     option_hyp_id: $option_hyp_id, 
                     option_id :  $option_id,
@@ -2194,6 +2206,9 @@
                 }, function(res,status){
                     if(status == 'success'){
                      //
+                        setTimeout(function() {
+                          $(e.target).removeClass('input_ajax_started');
+                        }, 1000);
                     }
             });
         });

@@ -6873,50 +6873,5 @@
 <script src="assets/js/custom/modals/create-app.js"></script>
 <script src="assets/js/custom/modals/upgrade-plan.js"></script>
 
-<script>
-
-    String.prototype.compose = (function (){
-        var re = /\{{(.+?)\}}/g;
-        return function (o){
-                return this.replace(re, function (_, k){
-                    return typeof o[k] != 'undefined' ? o[k] : '';
-                });
-            }
-    }());
-
-
-    var new_option = 
-    '<tr>' +
-        '<td>' +
-            '<div class="form-check form-check-sm form-check-custom form-check-solid">' +
-                '<input class="form-check-input" type="checkbox" value="1" />' + 
-            '</div>' + 
-        '</td>' +
-        '<td>{{option_content}}</td>' +
-        '<td class="text-end">' + 
-            '<a  class="btn btn-light btn-active-light-primary btn-sm option-delete" >Delete</a>' +
-            '<a  class="btn btn-light btn-active-light-primary btn-sm" >Update</a>' +
-        '</td>' +
-    '</tr>';
-
-    window.onload = function(){
-        $('.option-delete').click(function(e) {
-            e.preventDefault();
-            $lot = $(e.target).closest('tr');
-            $lot.remove();
-        });
-
-        $('.add-option').click(function(e){
-            $option_content = $('.option-content').val();
-
-            $('#options_list').append(
-                new_option.compose({
-                    'option_content' : $option_content
-                })
-            );
-        });
-    }
-</script>
-
 <?= $this->endSection() ?>
 <?= $this->endSection() ?>

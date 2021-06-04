@@ -1914,9 +1914,9 @@
 <script src="assets/js/custom/apps/chat/chat.js"></script>
 <script src="assets/js/custom/modals/create-app.js"></script>
 <script src="assets/js/custom/modals/upgrade-plan.js"></script>
-<script src="assets/js/custom/quiz_template.js"></script>
+<script src="assets/js/custom/custom-thinkframe.js"></script>
 
-<link rel="stylesheet" href="assets/css/question-template.css">
+<link rel="stylesheet" href="assets/css/custom-thinkframe.css">
 
 <script>
 
@@ -2052,6 +2052,26 @@
 
     });
 
+    /**
+     * If user clicks hypothesis "delete" button,
+     * it will delete all matched hyp, powers and links. 
+     */
+
+    $(document).on('click', '.remove-hyp', function(e){
+        $hyp_id = $(e.target).parent().parent().attr('hyp_id');
+
+        $.post('/getdatainjson/delete_hyp',{
+                hyp_id : $hyp_id
+            }, function(rs,status){
+                if(status == 'success'){
+                    $(e.target).parent().parent().remove();
+                    
+                    setTimeout(function() {
+                      alert('Hypothesis successfully deleted.');
+                    }, 1000);
+                }
+            });
+    });
 
     /**
      * Each time hyp box's content changed, 

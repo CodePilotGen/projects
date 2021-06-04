@@ -182,6 +182,12 @@ class Getdatainjson extends BaseController {
 
 		$result = $query->getResultArray();
 
+		$db = db_connect();
+
+		$builder = $db->table('options');
+		$builder->where('options.question_id', $question_id);
+		$builder->delete();
+
 		$question_last_id = intval($result[0]['question_id']);
 		echo $question_last_id;
 	}
@@ -209,10 +215,21 @@ class Getdatainjson extends BaseController {
 		$request = service('request');
 		$option_id   = $request->getPost('option_id');
 
-		$this->model_option = model('Model_option');
-		echo $this->model_option->deleteOption($option_id);
-        exit;
-	
+		$db = db_connect();
+
+		$builder = $db->table('options');
+		$builder->where('options.option_id', $option_id);
+		$builder->delete();
+
+		$builder = $db->table('option_hyp');
+		$builder->where('option_hyp.option_id', $option_id);
+		$builder->delete();		
+
+		$query = $db->query("SELECT * FROM options ORDER BY option_id DESC LIMIT 1");
+  		$result = $query->getRowArray();
+        
+  		echo json_encode($result);
+  		exit;
 	}
 
 	function add_option_hyp(){
@@ -261,6 +278,34 @@ class Getdatainjson extends BaseController {
         $query = $db->query("SELECT * FROM hyps");
   		$result = $query->getResultArray();
 
+  		echo json_encode($result);
+  		exit;
+	}
+
+	function delete_hyp(){
+		$request = service('request');
+		$post_data = $request->getPost();
+
+		$hyp_id = $post_data['hyp_id'];
+
+		$db = db_connect();
+		$builder = $db->table('hyps');
+
+		
+		$builder->where('hyps.hyp_id', $hyp_id);
+		$builder->delete();
+
+		$builder = $db->table('powers');
+		$builder->where('powers.hyp_id', $hyp_id);
+		$builder->delete();
+		
+		$builder = $db->table('option_hyp');
+		$builder->where('option_hyp.hyp_id', $hyp_id);
+		$builder->delete();
+
+		$query = $db->query("SELECT * FROM hyps ORDER BY hyp_id DESC LIMIT 1");
+  		$result = $query->getRowArray();
+        
   		echo json_encode($result);
   		exit;
 	}
